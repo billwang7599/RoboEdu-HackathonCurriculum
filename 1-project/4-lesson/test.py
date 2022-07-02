@@ -1,20 +1,22 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtWidgets import *
 import sys
 
 def window():
     app = QApplication(sys.argv)
-    win = QMainWindow()
+    win = QWidget()
 
             # window
     # set the title
-    win.setWindowTitle("Project 1")
+    win.setWindowTitle("Lesson 1")
 
     # set window pos and win size (x, y, width, height)
     win.setGeometry(100, 100, 500, 500)
     # set fixed width and height
+    '''
     win.setFixedWidth(500)
     win.setFixedHeight(500)
+    '''
 
             # label
     # prints "Hello world" onto app

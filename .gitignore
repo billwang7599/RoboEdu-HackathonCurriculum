@@ -132,3 +132,5 @@ dmypy.json
 # req
 .req.txt
 
+#test
+/1 -project/4-lesson/.test.py
