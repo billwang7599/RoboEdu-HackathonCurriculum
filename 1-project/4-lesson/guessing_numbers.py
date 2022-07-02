@@ -5,13 +5,8 @@ import random as ran
 
 #   starting screen
 def starting_menu():
-    screen = QMainWindow()
-    screen.setCentralWidget(central_widget()) # sets the central widget of the main widget
-    return screen
-
-def central_widget():
-    central_widget = QWidget()
-    layout = QGridLayout(central_widget)
+    screen = QWidget()
+    layout = QGridLayout(screen)
 
     # layout of central widget
     layout.addWidget(QLabel("Guess the Number!"), 1, 1)
@@ -28,7 +23,7 @@ def central_widget():
 
     layout.itemAt(1).widget().clicked.connect(start_button_func)
 
-    return central_widget
+    return screen
 
 def start_button_func():
     main.setCurrentIndex(main.currentIndex() + 1)
@@ -51,17 +46,7 @@ def game_screen():
         layout.itemAt(i).widget().setAlignment(Qt.AlignCenter)
         layout.itemAt(i).widget().setStyleSheet('font-size: 30px;')
 
-
     # button functions
-    '''
-    for i in range(layout.itemAt(2).widget().layout().count()):
-        btns.addButton(layout.itemAt(2).widget().layout().itemAt(i).widget())
-    test = QPushButton("hi")
-    layout.addWidget(test)
-    btns.addButton(test)
-    print(btns.buttons())
-    btns.buttonClicked.connect(lambda: print('hello'))
-    '''
     layout.itemAt(2).widget().layout().itemAt(0).widget().clicked.connect(lambda:guess_button(layout.itemAt(2).widget().layout().itemAt(0).widget(), layout.itemAt(0).widget(), layout.itemAt(1).widget(), correct))
     layout.itemAt(2).widget().layout().itemAt(1).widget().clicked.connect(lambda:guess_button(layout.itemAt(2).widget().layout().itemAt(1).widget(), layout.itemAt(0).widget(), layout.itemAt(1).widget(), correct))
     layout.itemAt(2).widget().layout().itemAt(2).widget().clicked.connect(lambda:guess_button(layout.itemAt(2).widget().layout().itemAt(2).widget(), layout.itemAt(0).widget(), layout.itemAt(1).widget(), correct))
@@ -72,6 +57,7 @@ def game_screen():
     layout.itemAt(2).widget().layout().itemAt(7).widget().clicked.connect(lambda:guess_button(layout.itemAt(2).widget().layout().itemAt(7).widget(), layout.itemAt(0).widget(), layout.itemAt(1).widget(), correct))
     layout.itemAt(2).widget().layout().itemAt(8).widget().clicked.connect(lambda:guess_button(layout.itemAt(2).widget().layout().itemAt(8).widget(), layout.itemAt(0).widget(), layout.itemAt(1).widget(), correct))
     layout.itemAt(2).widget().layout().itemAt(9).widget().clicked.connect(lambda:guess_button(layout.itemAt(2).widget().layout().itemAt(9).widget(), layout.itemAt(0).widget(), layout.itemAt(1).widget(), correct))
+    
     return screen
 
 def number_row():
