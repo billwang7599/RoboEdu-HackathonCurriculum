@@ -56,44 +56,44 @@ def game_screen():
 def guess_row(r):
     win = QWidget()
     layout = QHBoxLayout(win)
-    for i in range(5):
+    for i in range(5): # creates the guess input boxes
         lineEdit = QLineEdit()
         layout.addWidget(lineEdit)
         if r > 0:
-            lineEdit.setEnabled(False)
+            lineEdit.setEnabled(False) # disables all boxes after first row
         lineEdit.setMaxLength(1)
 
     return win
 
 # game function
 def submit_function():
-    global turn
+    global turn # gets the global variable turn since we need to edit turn variable
     row = {}
     correct_word = {}
     row_lay = main.currentWidget().layout().itemAt(turn).widget().layout()
     letter_correct = 0
 
-    for i in range(5):
+    for i in range(5): # puts each letter of the correct word and button into a dictionary
         row[i] = row_lay.itemAt(i).widget()
         correct_word[i] = word[i]
     
     for i in range(row_lay.count()):
-        if row[i].text().lower() == correct_word[i]:
+        if row[i].text().lower() == correct_word[i]: # if at index i the letters are the safe
             row[i].setStyleSheet('background: green;')
             letter_correct += 1
-        elif row[i].text().lower() in correct_word.values():
+        elif row[i].text().lower() in correct_word.values(): # if one of the guess letter are in the word
             row[i].setStyleSheet('background: yellow;')
-        else:
+        else: # no letters match
             row[i].setStyleSheet('background: red;')
     
-    if letter_correct == 5:
+    if letter_correct == 5: # win if all 5 letters are right
         win_screen()
-    elif turn == 4:
+    elif turn == 4: # if last turn and press submit and not all letters are right
         lose_screen()
 
     else:
-        turn += 1
-        for i in range(row_lay.count()):
+        turn += 1 # increments turn | not possible without global variable
+        for i in range(row_lay.count()): # disables previous buttons and enables the next few buttons
             row_lay.itemAt(i).widget().setEnabled(False)
             main.currentWidget().layout().itemAt(turn).widget().layout().itemAt(i).widget().setEnabled(True)
         
