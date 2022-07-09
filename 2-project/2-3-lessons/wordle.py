@@ -2,9 +2,6 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt
 
-# game variables
-word = 'train'
-
 def starting_win():
     win = QWidget()
     layout = QGridLayout(win)
@@ -42,14 +39,14 @@ def game_screen():
     win = QWidget()
     layout = QVBoxLayout(win)
 
-    for i in range(5):
+    for i in range(6):
         layout.addWidget(guess_row(i))
     
     submit = QPushButton("Submit")
     layout.addWidget(submit)
 
     # submit button function
-    layout.itemAt(5).widget().clicked.connect(submit_function)
+    layout.itemAt(6).widget().clicked.connect(submit_function)
 
     return win
 
@@ -88,9 +85,8 @@ def submit_function():
     
     if letter_correct == 5: # win if all 5 letters are right
         win_screen()
-    elif turn == 4: # if last turn and press submit and not all letters are right
+    elif turn == 5: # if last turn and press submit and not all letters are right
         lose_screen()
-
     else:
         turn += 1 # increments turn | not possible without global variable
         for i in range(row_lay.count()): # disables previous buttons and enables the next few buttons
@@ -138,9 +134,12 @@ def lose_screen():
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-
+    
+    # game variables
+    word = 'train'
     turn = 0
 
+    # app screens
     main = QStackedWidget()
     main.addWidget(starting_win())
     main.addWidget(game_screen())
@@ -150,3 +149,4 @@ if __name__ == "__main__":
     main.setGeometry(50, 50, 500, 500)
     main.show()
     sys.exit(app.exec_())
+
